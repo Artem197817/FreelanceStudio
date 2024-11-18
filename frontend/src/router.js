@@ -1,4 +1,6 @@
 import {Dashboard} from "./components/dashboard";
+import {Login} from "./components/login";
+import {SignUp} from "./components/sign-up";
 
 export class Router{
 
@@ -14,7 +16,7 @@ export class Router{
                title: 'Dashboard',
                template: '/templates/dashboard.html',
                load: () => {
-
+                   new Dashboard();
                }
 
            },
@@ -28,7 +30,7 @@ export class Router{
                title: 'Login',
                template: '/templates/login.html',
                load: () => {
-                   new Dashboard();
+                    new Login();
                }
            },
            {
@@ -36,7 +38,7 @@ export class Router{
                title: 'Sign Up',
                template: '/templates/sign-up.html',
                load: () => {
-
+                    new SignUp();
                }
            },
        ];
