@@ -6,47 +6,65 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Зарегистрировать нового пользователя</p>
-
+            <div id="common-error" class="text-center error invalid-feedback mb-3">
+                Регистрация не удалась. Обратитесь в поддержку.
+            </div>
             <form>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Имя">
+                    <input type="text" class="form-control" placeholder="Имя" id="name">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
+                    <span class="error invalid-feedback" id="name-error">Введите имя</span>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="text" class="form-control" placeholder="Фамилия" id="lastName">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                    <span class="error invalid-feedback" id="lastName-error">Введите фамилию</span>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email" id="email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
+                    <span class="error invalid-feedback" id="email-error">Введите корректный адрес</span>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Password" id="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                    <span class="error invalid-feedback" id="password-error">
+                        Введите пароль не менее 6 символов. Латинсие буквы и цифры.
+                    </span>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Повторить пароль">
+                    <input type="password" class="form-control" placeholder="Повторить пароль" id="repeat-password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                    <span class="error invalid-feedback" id="repeat-password-error">Пароли не совпадают</span>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
+                            <input type="checkbox" id="agree">
+                            <label for="agree">
                                 Я согласен <a href="javascript:void(0)">с условиями</a>
                             </label>
+                            <span class="error invalid-feedback" id="agree-error">Согласитесь с условиями</span>
                         </div>
                     </div>
                     <!-- /.col -->
@@ -54,7 +72,7 @@
                     <!-- /.col -->
                 </div>
                 <div class="col-12">
-                    <button type="button" class="btn btn-primary btn-block">Зарегистрироваться</button>
+                    <button type="button" class="btn btn-primary btn-block" id="button-login">Зарегистрироваться</button>
                 </div>
             </form>
 

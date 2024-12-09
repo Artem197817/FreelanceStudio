@@ -1,6 +1,8 @@
 import {Dashboard} from "./components/dashboard";
 import {Login} from "./components/login";
 import {SignUp} from "./components/sign-up";
+import {FreelancersList} from "./components/freelancers/freelancers-list";
+import {Logout} from "./components/freelancers/logout";
 
 export class Router {
 
@@ -14,8 +16,9 @@ export class Router {
             {
                 route: '/',
                 title: 'Dashboard',
-                template: '/templates/dashboard.html',
+                template: '/templates/pages/dashboard.html',
                 useLayout: '/templates/layout.html',
+                requiresAuth: true,
                 load: () => {
                     new Dashboard();
                 }
@@ -25,18 +28,18 @@ export class Router {
                 route: '/404',
                 title: 'Page Not Found',
                 useLayout: false,
-                template: '/templates/404.html',
+                template: '/templates/pages/404.html',
             },
             {
                 route: '/login',
                 title: 'Login',
                 useLayout: false,
-                template: '/templates/login.html',
+                template: '/templates/pages/login.html',
                 load: () => {
                     document.body.classList.add('login-page');
                     document.body.style.height = '100vh';
 
-                    new Login();
+                    new Login(this.openNewRoute.bind(this));
                 },
                 unload: () => {
                     document.body.classList.remove('login-page');
@@ -49,12 +52,12 @@ export class Router {
             {
                 route: '/sign-up',
                 title: 'Sign Up',
-                template: '/templates/sign-up.html',
+                template: '/templates/pages/sign-up.html',
                 useLayout: false,
                 load: () => {
                     document.body.classList.add('register-page');
                     document.body.style.height = '100vh';
-                    new SignUp();
+                    new SignUp(this.openNewRoute.bind(this));
                 },
                 unload: () => {
                     document.body.classList.remove('register-page');
@@ -63,6 +66,21 @@ export class Router {
                 styles: [
                     'icheck-bootstrap.min.css'
                 ]
+            },{
+            route: '/logout',
+                load: () => {
+                new Logout(this.openNewRoute.bind(this));
+                }
+            },
+            {
+                route: '/freelancers',
+                title: 'freelancers',
+                template: '/templates/pages/freelancers/list.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    new FreelancersList();
+                }
+
             },
         ];
     }
@@ -70,9 +88,15 @@ export class Router {
     initEvent() {
         window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this));
         window.addEventListener('popstate', this.activateRoute.bind(this));
-        document.addEventListener('click', this.newRouterOpen.bind(this))
+        document.addEventListener('click', this.clickHandler.bind(this))
     }
-   async newRouterOpen(e){
+    async openNewRoute(url){
+        const currentRoute = window.location.pathname;
+        history.pushState({},'', url);
+        await this.activateRoute(null, currentRoute);
+    }
+
+   async clickHandler(e){
 
         let element = null;
         if(e.target.nodeName === 'A'){
@@ -87,9 +111,7 @@ export class Router {
             if(!url || url ==='/#' || url.startsWith('javascript:void(0)')){
                 return
             }
-            const currentRoute = window.location.pathname;
-            history.pushState({},'', url);
-            await this.activateRoute(null, currentRoute);
+            await this.openNewRoute(url);
         }
     }
 

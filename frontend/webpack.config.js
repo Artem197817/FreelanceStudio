@@ -25,6 +25,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "./src/templates", to: "templates" },
+                { from: "./src/templates/pages", to: "templates" },
                 // { from: "./src/css", to: "css" },
                 { from: "./node_modules/admin-lte/plugins/fontawesome-free/webfonts", to: "webfonts" },
                 { from: "./node_modules/admin-lte/plugins/fontawesome-free/css/all.css", to: "css" },
